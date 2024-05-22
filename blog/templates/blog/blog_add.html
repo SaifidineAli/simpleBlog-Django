@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="text-center mt-4">Ajout Nouveau article</h1>
+
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" >Ajouter</button>
+        </form>
+    </div>
+
+{% endblock content %}
