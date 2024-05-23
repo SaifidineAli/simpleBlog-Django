@@ -5,7 +5,7 @@
 {% block content %}
 
     <div class="container">
-        <h1 class="text-center mt-4">Ajout Nouveau article</h1>
+        <h1 class="text-center mt-4">Modification des articles</h1>
 
         <form method="post">
             {% csrf_token %}
@@ -18,7 +18,7 @@
                 {{ form.content | add_class:"form-control" }}
             </div>
             <input type="hidden" name="edit_article" value="True" id="id_edit_article">
-            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="submit" class="btn btn-success">Enregistrer</button>
         </form>
     </div>
 

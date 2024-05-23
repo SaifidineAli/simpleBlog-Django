@@ -23,4 +23,6 @@ urlpatterns = [
     path('', blog.views.home, name='home'),
     path('articles/', blog.views.home, name='article-list'),
     path('articles/new/', blog.views.article_add, name='article-add'),
+    path('articles/<int:id>/change/', blog.views.article_edit, name='article-edit'),
+    path('articles/<int:id>/delete/', blog.views.article_delete, name='article-delete'),
 ]

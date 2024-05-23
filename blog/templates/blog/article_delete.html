@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="text-center mt-4">Etes-vous sûr de vouloir supprimer ?</h1>
+
+        <div class="card shadow px-4 py-2">
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-default" id="annuler_suppression" onclick="annulerSuppression()">Annuler</button>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block javascript %}
+    <script>
+        function annulerSuppression() {
+            window.location.href = "{% url 'article-list' %}";
+        }
+    </script>
+{% endblock javascript %}

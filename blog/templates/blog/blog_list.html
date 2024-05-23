@@ -13,6 +13,13 @@
                 <h4>{{ article.title }}</h4>
                 <p class="my-3">{{ article.content }}</p>
                 <p><strong>Date publication :</strong> <i>{{ article.posted_at }}</i></p>
+                <div class="d-flex justify-content-between">
+                    <div></div>
+                    <div>
+                        <a href="{% url 'article-edit' article.id %}">modifier</a>
+                        <a href="{% url 'article-delete' article.id %}">supprimer</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>

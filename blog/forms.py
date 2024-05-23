@@ -7,3 +7,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ('title', 'content')
+        
+        
+class DeleteArticleForm(forms.Form):
+    delete_blog = forms.BooleanField(widget=forms.HiddenInput, initial=True)
