@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Article
-from .forms import ArticleForm, DeleteArticleForm
+from .forms import ArticleForm, DeleteArticleForm, CommentForm
 
 def home(request):
     articles = Article.objects.all()
@@ -44,3 +44,25 @@ def article_delete(request, id):
         form = DeleteArticleForm()
     
     return render(request, 'blog/article_delete.html', context={'form': form})
+
+
+def article_commentaires(request, id):
+    article = get_object_or_404(Article, id=id)
+    comments = article.comments.all()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.article = article
+            new_comment.save()
+            # Réinitialiser le formulaire après soumission
+            form = CommentForm()
+    else:
+        form = CommentForm()
+    
+    context = {
+        'article': article,
+        'comments': comments,
+        'form': form,
+    }
+    return render(request, 'blog/article_commentaires.html', context=context)

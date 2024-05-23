@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="card shadow px-4 py-2 my-4">
+            <h1 class="text-center mt-4">{{ article.title }}, <i>publié le {{ article.posted_at }}</i></h1>
+            <p class="mt-3">{{ article.content }}</p>
+        </div>
+
+        <h2 class="mt-3">Commentaires</h2>
+        {% for comment in comments %}
+            <p>
+                <strong>{{ comment.author }}</strong> : <i>{{ comment.content }}</i> - 
+                <i>({{ comment.commented_at }})</i>
+            </p>
+        {% endfor %}
+
+        <div class="mt-5">
+            <h4 class="my-2">Votre commentaire</h4>
+            <form method="post" style="width:400px">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_author" class="form-label">Votre nom</label>
+                    {{ form.author | add_class:"form-control" }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_content" class="form-label">Commentaire</label>
+                    {{ form.content | add_class:"form-control" }}
+                </div>
+                <input type="hidden" name="edit_comment" value="True" id="id_edit_comment">
+                <button type="submit" class="btn btn-primary">Commenter</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
